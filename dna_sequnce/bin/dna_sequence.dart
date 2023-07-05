@@ -1,30 +1,23 @@
-//import '/home/aluno/Área de Trabalho/aval3/dna_sequence/lib/dnaSequence.dart';
+import 'dart:io';
 import '../lib/dnaSequence.dart';
 
-
-
 void main() {
-  print('ALUNO; JOÃO VITOR DA SILVA PEREIRA\n');
-  print('SEQUENCIA DE DNA');
+  List<String> nucleotides = ['A', 'T', 'G', 'C'];
+  print('SEQUENCIAS DE DNA');
 
-  DNASequence dna1 = DNASequence('atgcat');
-  print('DNA1: ${dna1.dna}');
-  print('OCORRENCIAS');
-  print('A: ${dna1.occurrences('A')} | T: ${dna1.occurrences('T')} | C: ${dna1.occurrences('C')} | G: ${dna1.occurrences('G')}\n');
+  List<DNASequence> dnaList = [];
+  dnaList.add(DNASequence('atgcatgact')); // sequencia passada como pareamtro
+  dnaList.add(DNASequence.fromAleatory(10)); // sequencia aleatória
+  dnaList.add(dnaList[1].createInstance()); // sequencia inversa da sequencia de outra instancia
+  dnaList.add(dnaList[2].createInstanceComplement()); // complemento da sequencia de outra instancia
 
-  DNASequence dna2 = DNASequence.fromAleatory(10);
-  print('DNA2: ${dna2.dna}');
-  print('OCORRENCIAS');
-  print('A: ${dna2.occurrences('A')} | T: ${dna2.occurrences('T')} | C: ${dna2.occurrences('C')} | G: ${dna2.occurrences('G')}\n');
-
-
-  DNASequence dna3 = dna2.createInstance(dna2.dna);
-  print('DNA3: ${dna3.dna}');
-  print('OCORRENCIAS');
-  print('A: ${dna3.occurrences('A')} | T: ${dna3.occurrences('T')} | C: ${dna3.occurrences('C')} | G: ${dna3.occurrences('G')}\n');
-
-  DNASequence dna4 = dna1.createInstance(dna1.dna);
-  print('DNA4: ${dna4.dna}');
-  print('OCORRENCIAS');
-  print('A: ${dna4.occurrences('A')} | T: ${dna4.occurrences('T')} | C: ${dna4.occurrences('C')} | G: ${dna4.occurrences('G')}');
+  for (final i in dnaList) {
+    print('\nDNA_${dnaList.indexOf(i) + 1}: ${i.dna}');
+    print('OCORRENCIAS');
+    for (final j in nucleotides) {
+      stdout.write('$j: ${i.occurrences(j)} | ');
+    }
+    print('');
+  }
+  print('\nALUNO: JOÃO VITOR DA SILVA PEREIRA');
 }
